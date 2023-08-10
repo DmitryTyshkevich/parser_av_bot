@@ -6,7 +6,7 @@ from aiogram.dispatcher.filters import Command, Text
 import config
 import keyboard
 import logging
-import parser
+import pars
 
 # Для запуска модуля с парсером
 asyncio.set_event_loop(
@@ -63,20 +63,20 @@ async def get_message(message: types.Message):
         case 'Info':
             await message.answer('Информация о боте:', reply_markup=keyboard.in_info)
         case "AUDI 80":
-            if message.text in parser.links_per_model:
-                for link in parser.links_per_model[message.text]:
+            if message.text in pars.links_per_model:
+                for link in pars.links_per_model[message.text]:
                     await message.answer(link)
         case "AUDI 90":
-            if message.text in parser.links_per_model:
-                for link in parser.links_per_model[message.text]:
+            if message.text in pars.links_per_model:
+                for link in pars.links_per_model[message.text]:
                     await message.answer(link)
         case "AUDI 100":
-            if message.text in parser.links_per_model:
-                for link in parser.links_per_model[message.text]:
+            if message.text in pars.links_per_model:
+                for link in pars.links_per_model[message.text]:
                     await message.answer(link)
         case "AUDI 200":
-            if message.text in parser.links_per_model:
-                for link in parser.links_per_model[message.text]:
+            if message.text in pars.links_per_model:
+                for link in pars.links_per_model[message.text]:
                     await message.answer(link)
         case "AUDI Class A":
             await bot.send_message(message.chat.id, text='Выберите модель:',
@@ -98,8 +98,8 @@ async def get_message(message: types.Message):
 # Обработчик инлайн-кнопок: buttons_models_audi
 @dp.callback_query_handler(Text(startswith='AUDI'))
 async def func(call: types.CallbackQuery):
-    if call.data in parser.links_per_model:
-        for link in parser.links_per_model[call.data]:
+    if call.data in pars.links_per_model:
+        for link in pars.links_per_model[call.data]:
             await call.message.answer(link)
         await call.answer()
 
